@@ -1,0 +1,28 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+group = 'awslambdaexample'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-core', version:'1.1.0'
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-events', version:'1.1.0'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version:'5.3.1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version:'5.0.1'
+}
+
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources
+    from fileTree(dir: 'cloud')
+    into('lib') {
+        from configurations.compile
+    }
+}
+
+build.dependsOn buildZip
