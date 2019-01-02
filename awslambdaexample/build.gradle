@@ -1,9 +1,11 @@
-sourceCompatibility = 1.8
+apply plugin: 'java'
 
 group = 'awslambdaexample'
 version = '1.0-SNAPSHOT'
 
-
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     compile group: 'com.amazonaws', name: 'aws-lambda-java-core', version:'1.1.0'
